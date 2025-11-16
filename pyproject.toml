@@ -1,0 +1,14 @@
+[project]
+name = "inventorysystem-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.72.1",
+    "fastapi[standard]>=0.121.2",
+    "mcp[cli]>=1.21.0",
+    "mysql-connector-python>=9.5.0",
+    "openai>=2.7.2",
+    "python-dotenv>=1.2.1",
+]
