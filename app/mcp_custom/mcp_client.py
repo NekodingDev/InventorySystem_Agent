@@ -8,7 +8,7 @@ from mcp.client.stdio import stdio_client
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam, ChatCompletionToolParam
 
-from app.mcp.schemas import ChatResponse, ChatResponseGraphicOnly
+from app.mcp_custom.schemas import ChatResponse, ChatResponseGraphicOnly
 
 import logging
 

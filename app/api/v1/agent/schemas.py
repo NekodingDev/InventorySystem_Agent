@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.mcp.schemas import ChatResponse
+from app.mcp_custom.schemas import ChatResponse
 
 class ChatAgentRequest(BaseModel):
     mensaje: str

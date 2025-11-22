@@ -11,3 +11,4 @@ agent_controller = AgetController()
 # Definir la ruta para el Chat Agent
 router_agent_chat.post("/chat-agent", response_model=ChatAgentResponse)(agent_controller.chat_agent_controller)
 router_agent_chat.post("/chat-agent-stream", response_model=ChatAgentStreamResponse)(agent_controller.chat_agent_stream_controller)
+router_agent_chat.post("/chat-agent-v2", response_model=ChatAgentStreamResponse)(agent_controller.chat_agent_controller_v2)
