@@ -157,3 +157,67 @@ def format_insight(insight: str):
     """
     return insight
 
+
+def calculate_data(values: List[float], operation: str) -> dict:
+    """
+    Realiza cálculos matemáticos sobre un conjunto de valores numéricos.
+    
+    Útil para procesar datos obtenidos del tool execute_sql_query.
+    
+    Operaciones soportadas:
+    - 'sum': Suma todos los valores
+    - 'average': Calcula el promedio
+    - 'min': Encuentra el valor mínimo
+    - 'max': Encuentra el valor máximo
+    - 'product': Multiplica todos los valores
+    - 'variance': Calcula la varianza
+    - 'std_dev': Calcula la desviación estándar
+    - 'median': Calcula la mediana
+    
+    :param values: Lista de valores numéricos a procesar
+    :param operation: Operación a realizar (sum, average, min, max, product, variance, std_dev, median)
+    :return: Diccionario con el resultado del cálculo
+    """
+    try:
+        if not values or len(values) == 0:
+            return {"success": False, "error": "La lista de valores no puede estar vacía"}
+        
+        operation = operation.lower().strip()
+        
+        if operation == 'sum':
+            result = sum(values)
+        elif operation == 'average':
+            result = sum(values) / len(values)
+        elif operation == 'min':
+            result = min(values)
+        elif operation == 'max':
+            result = max(values)
+        elif operation == 'product':
+            result = 1
+            for v in values:
+                result *= v
+        elif operation == 'variance':
+            mean = sum(values) / len(values)
+            variance = sum((x - mean) ** 2 for x in values) / len(values)
+            result = variance
+        elif operation == 'std_dev':
+            mean = sum(values) / len(values)
+            variance = sum((x - mean) ** 2 for x in values) / len(values)
+            result = variance ** 0.5
+        elif operation == 'median':
+            sorted_values = sorted(values)
+            n = len(sorted_values)
+            if n % 2 == 0:
+                result = (sorted_values[n//2 - 1] + sorted_values[n//2]) / 2
+            else:
+                result = sorted_values[n//2]
+        else:
+            return {"success": False, "error": f"Operación '{operation}' no soportada. Use: sum, average, min, max, product, variance, std_dev, median"}
+        
+        return {"success": True, "operation": operation, "result": result, "count": len(values)}
+    
+    except (ValueError, TypeError) as e:
+        return {"success": False, "error": f"Error al procesar los valores: {str(e)}"}
+    except Exception as e:
+        return {"success": False, "error": f"Error inesperado: {str(e)}"}
+

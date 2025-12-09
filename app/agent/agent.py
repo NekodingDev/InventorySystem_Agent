@@ -5,7 +5,7 @@ from google.adk.agents.llm_agent import Agent
 from google.adk.models.lite_llm import LiteLlm
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
-from app.agent.tools import execute_sql_query, graphic_recomendation, format_insight
+from app.agent.tools import execute_sql_query, graphic_recomendation, format_insight, calculate_data
 from google.genai import types
 
 load_dotenv() # Cargar variables de entorno
@@ -77,7 +77,7 @@ async def init_agent():
         Las respuestas textuales deben ser del mismo tamaño todas las partes. No usar
         tamaños de letra grandes.
         """,
-        tools=[execute_sql_query, graphic_recomendation, format_insight],
+        tools=[execute_sql_query, graphic_recomendation, format_insight, calculate_data],
     )
     print(f"Se ha creado el agente {agent.name} usando el modelo {MODEL_NAME}")
 
