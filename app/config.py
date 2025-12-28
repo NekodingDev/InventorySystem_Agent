@@ -10,5 +10,6 @@ class Config:
     DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
     DB_NAME = os.getenv("DB_NAME", "mi_base_de_datos")
     PORT = int(os.getenv("PORT", 4002))
+    ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 
 config = Config()

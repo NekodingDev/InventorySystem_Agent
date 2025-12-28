@@ -10,8 +10,11 @@ from google.genai import types
 
 load_dotenv() # Cargar variables de entorno
 
+# Flag para determinar si se usará o no el modelo local
+LOCAL_MODEL = True
+
 # Definir constantes sobre el modelo
-MODEL_NAME = 'openai/gpt-4o'
+MODEL_NAME = 'openai/gpt-4o' if not LOCAL_MODEL else 'ollama_chat/llama3.1'
 
 # Definir constantes para indentificar la sesión
 APP_NAME = 'Cerámica de Altura App'
@@ -25,10 +28,10 @@ async def call_agent_async(query: str, runner: Runner, user_id, session_id):
   final_response_text = "El agente no ha enviado ningún mensaje." # Mensaje por defecto
 
   async for event in runner.run_async(user_id=user_id, session_id=session_id, new_message=content):
-      print('El evento es: ', event.model_dump_json())
+      print('El evento es: ', event.model_dump_json(indent=2))
       if event.content and event.content.parts:
           for part in event.get_function_responses():
-              print('EL PART ES: ', part.model_dump_json())
+              print('EL PART ES: ', part.model_dump_json(indent=2))
               if part.name == 'execute_sql_query':
                   print('Se usó este tool de sql')
                   yield '[[TOOL]]' + json.dumps(part.response, default=str)

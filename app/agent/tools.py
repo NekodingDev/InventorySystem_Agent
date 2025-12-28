@@ -115,8 +115,10 @@ def execute_sql_query(query: str) -> dict:
     - cantidad: Cantidad disponible del producto (int)
     - created_at: Fecha de creación del registro de stock (datetime)
 
-    :param query: Consulta SQL a ejecutar.
-    :return: Diccionario con los resultados de la consulta.
+    Args:
+        query: Consulta SQL a ejecutar.
+    Returns:
+        Diccionario con los resultados de la consulta.
     """
     try:
         connection = connect_to_database(
@@ -146,7 +148,14 @@ def execute_sql_query(query: str) -> dict:
 
 def graphic_recomendation(type_g: CharType, data: List[Data] ):
     """
-    SIEMPRE que se pida un gráfico se debe usar este tool
+    Genera una recomendación de gráfico.
+    
+    Args:
+        type_g: Tipo de gráfico (barras, lineas, pastel)
+        data: Lista de objetos {description: str, value: str/int}
+        
+    Returns:
+        JSON string con el gráfico completo
     """
     return Graphic(type=type_g, data=data).model_dump_json()
 

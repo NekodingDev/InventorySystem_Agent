@@ -25,4 +25,4 @@ app.include_router(router_agent_chat, prefix="/api/v1")
 # Iniciar la aplicación
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=config.PORT, log_level="info")
+    uvicorn.run("app.main:app", host="0.0.0.0", port=config.PORT, log_level="info", reload=(config.ENVIRONMENT == "development"))
